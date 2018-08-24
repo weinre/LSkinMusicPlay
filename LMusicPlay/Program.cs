@@ -1,8 +1,7 @@
 ﻿using MusicPlay;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+
 
 namespace LMusicPlay
 {
@@ -16,7 +15,7 @@ namespace LMusicPlay
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new Form1());
         }
     }
 }
