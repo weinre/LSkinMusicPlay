@@ -8,6 +8,11 @@ namespace Test
 {
     internal class Music
     {
+        /// <summary>
+        /// this is music 
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <returns></returns>
         public string State(ref AxWindowsMediaPlayer Player)
         {
             string result = "";
