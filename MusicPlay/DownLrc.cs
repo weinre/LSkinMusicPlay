@@ -16,7 +16,7 @@ namespace MusicPlay
         {
             WebClient webClient = new WebClient();
             url = url.Replace(@"\", @"");
-            if (webClient.IsBusy)  
+            if (webClient.IsBusy)    
             {
                 webClient.CancelAsync();
             }
