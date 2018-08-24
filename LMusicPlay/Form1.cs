@@ -1,6 +1,4 @@
-﻿using AxAPlayer3Lib;
-using AxPlayer3;
-using ID3;
+﻿
 using Shell32;
 using System;
 using System.Drawing;
@@ -20,21 +18,22 @@ namespace LMusicPlay
         {
 
             //this.Controls.Add(a);
-           
-            //axPlayer1.Open(@"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3");
-            //axPlayer1.Play();
 
             string strMp3 = @"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3";
+            axPlayer1.Open(@"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3");
+            axPlayer1.Play();
+
+         //
             string mp3InfoInterHtml = "";
 
-            ID3Info info = new ID3Info(strMp3, true);
+         //   ID3Info info = new ID3Info(strMp3, true);
             //Image image = System.Drawing.Image.FromStream();
 
 
             //Folder dir = sh.NameSpace(Path.GetDirectoryName(strMp3));
             //FolderItem item = dir.ParseName(Path.GetFileName(strMp3));
 
-            Image image = System.Drawing.Image.FromStream(info.ID3v2Info.AttachedPictureFrames.Items[0].Data);
+      //      Image image = System.Drawing.Image.FromStream(info.ID3v2Info.AttachedPictureFrames.Items[0].Data);
 
             //         this.BackgroundImage = image;
             //ShellClass 
@@ -54,15 +53,20 @@ namespace LMusicPlay
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string strMp3 = @"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3";
+            //string strMp3 = @"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3";
 
 
-            ID3Info info = new ID3Info(strMp3, true);
-            Image image = System.Drawing.Image.FromStream(info.ID3v2Info.AttachedPictureFrames.Items[0].Data);
+            //ID3Info info = new ID3Info(strMp3, true);
+            //Image image = System.Drawing.Image.FromStream(info.ID3v2Info.AttachedPictureFrames.Items[0].Data);
 
-            Console.WriteLine(info.ID3v2Info.ToString()); 
+            //Console.WriteLine(info.ID3v2Info.ToString()); 
 
-            this.BackgroundImage = image;
+            //this.BackgroundImage = image;
+        }
+
+        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

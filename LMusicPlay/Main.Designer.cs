@@ -528,7 +528,7 @@ namespace MusicPlay
         #endregion
         private System.Windows.Forms.ToolTip toast;
         private System.Windows.Forms.Panel Search_view;
-        private System.Windows.Forms.ContextMenuStrip Menu;
+        private new System.Windows.Forms.ContextMenuStrip Menu;
         private System.Windows.Forms.ToolStripMenuItem Down;
         private System.Windows.Forms.Panel search_back;
         private System.Windows.Forms.TextBox txt_Songname;

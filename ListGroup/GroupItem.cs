@@ -25,7 +25,7 @@ namespace ListGroup
         public Image takeUp = Resources.up01;//收起的状态图片
 
         public bool down = false; //Items是否已经展开
-        public KeyDown KeyDown;//键盘按下的对象
+        public new KeyDown KeyDown;//键盘按下的对象
         public string baseNmae;
 
         public GroupItem() {
