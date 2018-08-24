@@ -97,6 +97,9 @@
     <EmbeddedResource Include="ItemSong.resx">
       <DependentUpon>ItemSong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LrcPanel.resx">
+      <DependentUpon>LrcPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

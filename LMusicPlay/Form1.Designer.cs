@@ -30,23 +30,14 @@ namespace LMusicPlay
         /// </summary>
         private void InitializeComponent()
         {
-            this.axPlayer1 = new AxPlayer3.AxPlayer();
             this.SuspendLayout();
-            // 
-            // axPlayer1
-            // 
-            this.axPlayer1.Location = new System.Drawing.Point(56, 73);
-            this.axPlayer1.Name = "axPlayer1";
-            this.axPlayer1.Size = new System.Drawing.Size(386, 199);
-            this.axPlayer1.TabIndex = 0;
-            this.axPlayer1.Volume = 80;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.axPlayer1);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(728, 410);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -56,8 +47,6 @@ namespace LMusicPlay
 
 
         #endregion
-
-        private AxPlayer axPlayer1;
     }
 }
 

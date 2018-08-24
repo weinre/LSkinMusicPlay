@@ -9,8 +9,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Test;
-
+using static AxPlayer3.AxPlayer;
 
 namespace MusicPlay
 {
@@ -40,7 +39,6 @@ namespace MusicPlay
         Volume yl = new Volume();
         public string list;
         public DownSong down = new DownSong();
-        Music music = new Music();
         List<Song> Songs = null;
         int tag = 0;
         [DllImport("user32.dll")]
@@ -55,22 +53,22 @@ namespace MusicPlay
         kugou k = new kugou();
         http h = new http();
         Color itemColor = Color.Black;
-        System.Threading.Timer Play_Listen;
+        Timer Play_Listen = new Timer();
         DownSongerImg downSongerImg = new DownSongerImg();
         ModePlay playMode = new ModePlay();
         DownLoadManage downm = new DownLoadManage();
         //GaussianBlur gs = new GaussianBlur(0);
         Zoom zoom = new Zoom();
         //Timer play_Listen_tick;
-        System.Drawing.Image DefaultSonger = Image.FromFile(@"System\Static\DefaultSonger.jpg");
-        Image play_hover = System.Drawing.Image.FromFile("System\\Hover\\play.png");
-        Image play_static = Image.FromFile("System\\Static\\play.png");
-        Image pause_hover = Image.FromFile("System\\Hover\\pause.png");
-        Image pause_static = Image.FromFile("System\\Static\\pause.png");
-        string rootPath = "Data";
-        string audioPath = "Data\\Songs\\";
-        string lrcPath = "Data\\Songs\\";
-        string SingerPath = "Data\\Songer\\";
+        System.Drawing.Image DefaultSonger = Image.FromFile(Application.StartupPath + "\\System\\Static\\DefaultSonger.jpg");
+        Image play_hover = System.Drawing.Image.FromFile(Application.StartupPath + "\\System\\Hover\\play.png");
+        Image play_static = Image.FromFile(Application.StartupPath + "\\System\\Static\\play.png");
+        Image pause_hover = Image.FromFile(Application.StartupPath + "\\System\\Hover\\pause.png");
+        Image pause_static = Image.FromFile(Application.StartupPath + "\\System\\Static\\pause.png");
+        string rootPath = Application.StartupPath + "\\Data";
+        string audioPath = Application.StartupPath + "\\Data\\Songs\\";
+        string lrcPath = Application.StartupPath + "\\Data\\Songs\\";
+        string SingerPath = Application.StartupPath + "\\Data\\Songer\\";
         //去除页面闪烁
         protected override CreateParams CreateParams
         {
@@ -84,10 +82,14 @@ namespace MusicPlay
 
 
         LrcPanel lrcPanel = new LrcPanel();
-
+        AxPlayer3.AxPlayer axPlayer1 = new AxPlayer3.AxPlayer();
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            Play_Listen.Interval = 1;
+            Play_Listen.Tick += new EventHandler(Play_Listen_event);
+            Play_Listen.Start();
 
             if (!Directory.Exists(rootPath)) Directory.CreateDirectory(rootPath);
             if (!Directory.Exists(audioPath)) Directory.CreateDirectory(audioPath);
@@ -136,10 +138,10 @@ namespace MusicPlay
 
             LrcView.Controls.Add(lrcPanel);
 
-            axWindowsMediaPlayer1.uiMode = "None";
+
             FormFade.FadeIn(this, 1);
             down.Path = audioPath;
-            Play_Listen = new System.Threading.Timer(Play_Listen_event, null, 0, 1);
+          
 
             LrcView.Visible = false;
             LrcView.AutoScroll = true;
@@ -161,12 +163,12 @@ namespace MusicPlay
 
         private void changePostion(object sender, EventArgs e)
         {
-            this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = (lrcPanel.MouseOnLrc.PostionDouble / 1000);
+            axPlayer1.Position = (int)lrcPanel.MouseOnLrc.PostionDouble;
         }
 
         private void SearchModel()
         {
-            Songerimg.Image = Image.FromFile(@"System\Hover\down.png");
+            Songerimg.Image = Image.FromFile(Application.StartupPath+@"\System\Hover\down.png");
             Color df = Color.FromArgb(20, 155, 118);
             model = "SearchModel";
             Search_view.Visible = true;
@@ -188,17 +190,17 @@ namespace MusicPlay
         {
             if (size < 1)
             {
-                pictureBox1.Image = Image.FromFile(@"System\Static\none.png");
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\System\Static\none.png");
             }
             if (size >= 1 && size <= 60)
             {
-                pictureBox1.Image = Image.FromFile(@"System\Static\min.png");
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\System\Static\min.png");
             }
             if (size > 60)
             {
-                pictureBox1.Image = Image.FromFile(@"System\Static\big.png");
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\System\Static\big.png");
             }
-            axWindowsMediaPlayer1.settings.volume = size;
+            axPlayer1.Volume = size;
         }
         private void Search(string songname)
         {
@@ -214,12 +216,15 @@ namespace MusicPlay
             string tmppath = audioPath + s.Filename + "." + s.Extname;
             if (File.Exists(tmppath))
             {
-                axWindowsMediaPlayer1.URL = tmppath;
+                axPlayer1.Open(tmppath);
+                axPlayer1.Play();
             }
             else
             {
                 h.GetSong(s.Hash, s);//获取播放信息
-                axWindowsMediaPlayer1.URL = s.play_url;//播放
+
+                axPlayer1.Open(s.play_url);
+                axPlayer1.Play();
 
                 LoadLrc(s);
                 changeImg(s);
@@ -402,7 +407,7 @@ namespace MusicPlay
             foreach (Song song in LstSong)
             {
                 ItemSong item = new ItemSong(song.Filename, CastToFen(song.DurationStr), song.MvHash);
-                item.Size = new Size(Songlist.Width - 20, 31);
+                item.Size = new Size(Songlist.FlowLayoutPanel.Width - 20, 31);
                 //item.BackColor = Color.Beige;
                 item.DoubleClick += new EventHandler(this.ItemSongDoublick);
                 item.MvIconClick += new ItemSong.Callback(MvIconClick);
@@ -453,8 +458,9 @@ namespace MusicPlay
 
 
             Play(s);
+            axPlayer1.Open(type.Replace("\\", "").Replace("\"", ""));
 
-            axWindowsMediaPlayer1.URL = type.Replace("\\", "").Replace("\"", "");
+            axPlayer1.Play();
 
             MVmode();
         }
@@ -473,10 +479,9 @@ namespace MusicPlay
             ItemSong label = (ItemSong)sender;
             Song a = new Song();
             a = (Song)label.Tag;
-
             selectnow = a;
             toast.SetToolTip(label, "歌曲名称: " + a.Filename + "\n歌手: " + a.Singername + "\n时长: " + CastToFen(a.DurationStr));
-            label.BackgroundImage = Image.FromFile("System\\Static\\long.png");
+            label.BackgroundImage = Image.FromFile(Application.StartupPath + "\\System\\Static\\long.png");
         }
         private void label1_MouseLeave(object sender, EventArgs e)
         {
@@ -495,61 +500,58 @@ namespace MusicPlay
 
 
         }
-        int i = 0;
-        private void Play_Listen_event(object sender)
+        private void Play_Listen_event(object sender,EventArgs e)
         {
 
-            i++;
 
-            lrcPanel.ChangePostion((this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition));
+            lrcPanel.ChangePostion(axPlayer1.Position);
 
-            label10.Text = i + "";
 
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("stop"))
+            if (axPlayer1.State == PLAY_STATE.PS_CLOSING)
             {
                 this.Next();
             }
-            if (this.music.State(ref axWindowsMediaPlayer1).Equals("pause") && this.tag == 1)
+            if (axPlayer1.State == PLAY_STATE.PS_PAUSED && this.tag == 1)
             {
                 this.btn_play.Image = play_hover;
             }
-            if (this.music.State(ref axWindowsMediaPlayer1).Equals("pause") && this.tag == 0)
+            if (axPlayer1.State == PLAY_STATE.PS_CLOSING && this.tag == 0)
             {
                 this.btn_play.Image = play_static;
             }
-            if (this.music.State(ref axWindowsMediaPlayer1).Equals("play") && this.tag == 1)
+            if (axPlayer1.State == PLAY_STATE.PS_PLAY && this.tag == 1)
             {
                 this.btn_play.Image = pause_hover;
             }
-            if (this.music.State(ref axWindowsMediaPlayer1).Equals("play") && this.tag == 0)
+            if (axPlayer1.State == PLAY_STATE.PS_PLAY && this.tag == 0)
             {
                 this.btn_play.Image = pause_static;
             }
 
 
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("play") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("pause"))
+            if (axPlayer1.State == PLAY_STATE.PS_PLAY || axPlayer1.State == PLAY_STATE.PS_PAUSED)
             {
+                int num = axPlayer1.Duration;
+                int num2 = axPlayer1.Position;
+                if (num2 == 0) num2 = 1;
+                this.blue.Width = ((this.gray.Width * num2) / num);
 
-                int num = (int)this.music.Length(ref this.axWindowsMediaPlayer1);
-                int num2 = (int)this.music.now(ref this.axWindowsMediaPlayer1);
-                this.blue.Width = (int)((double)(this.gray.Width * num2) * 1.0 / (double)num);
-                this.label3.Text = this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
-                this.label4.Text = "/ " + this.axWindowsMediaPlayer1.currentMedia.durationString;
+                this.label3.Text = axPlayer1.PositionString + "/" + axPlayer1.DurationString;
+
                 label10.Text = playnow.Filename;
             }
         }
         private void panel3_MouseDown(object sender, MouseEventArgs e)
         {
 
-
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("pause") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("play"))
+            if (axPlayer1.State == PLAY_STATE.PS_PAUSED || axPlayer1.State == PLAY_STATE.PS_PLAY)
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = this.music.Length(ref this.axWindowsMediaPlayer1) / (double)this.gray.Width * (double)e.X;
+                axPlayer1.Position = (int)axPlayer1.Duration / this.gray.Width * e.X;
             }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("stop") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("ready") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("未知"))
+            if (axPlayer1.State == PLAY_STATE.PS_PAUSED || axPlayer1.State == PLAY_STATE.PS_READY)
             {
 
                 if (Songs.Count > 0)
@@ -579,9 +581,6 @@ namespace MusicPlay
                     exist = true;
                     if (i == 0)
                     {
-
-
-
                         Play(Songs[this.Songs.Count - 1]);
                     }
 
@@ -589,9 +588,6 @@ namespace MusicPlay
                     {
                         Play(Songs[i - 1]);
                     }
-
-
-
                     break;
                 }
             }
@@ -611,9 +607,9 @@ namespace MusicPlay
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("stop") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("ready") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("未知"))
-            {
 
+            if (axPlayer1.State == PLAY_STATE.PS_PAUSED || axPlayer1.State == PLAY_STATE.PS_READY)
+            {
                 if (Songs.Count > 0)
                 {
                     Play(Songs[0]);
@@ -642,13 +638,11 @@ namespace MusicPlay
                     exist = true;
                     if (i + 1 >= this.Songs.Count)
                     {
-
                         Play(Songs[0]);
                     }
 
                     else
                     {
-
 
                         Play(Songs[i + 1]);
                     }
@@ -672,19 +666,19 @@ namespace MusicPlay
         }
         private void pictureBox4_MouseEnter(object sender, EventArgs e)
         {
-            this.btn_next.Image = Image.FromFile("System\\Hover\\next.png");
+            this.btn_next.Image = Image.FromFile(Application.StartupPath + "\\System\\Hover\\next.png");
         }
         private void pictureBox4_MouseLeave(object sender, EventArgs e)
         {
-            this.btn_next.Image = Image.FromFile("System\\Static\\next.png");
+            this.btn_next.Image = Image.FromFile(Application.StartupPath+"\\System\\Static\\next.png");
         }
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
-            this.btn_up.Image = Image.FromFile("System\\Hover\\up.png");
+            this.btn_up.Image = Image.FromFile(Application.StartupPath + "\\System\\Hover\\up.png");
         }
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
-            this.btn_up.Image = Image.FromFile("System\\Static\\up.png");
+            this.btn_up.Image = Image.FromFile(Application.StartupPath + "\\System\\Static\\up.png");
         }
         private void pictureBox2_MouseEnter(object sender, EventArgs e)
         {
@@ -696,7 +690,7 @@ namespace MusicPlay
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("stop") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("ready") || this.music.State(ref this.axWindowsMediaPlayer1).Equals("未知"))
+            if (axPlayer1.State == PLAY_STATE.PS_CLOSING || axPlayer1.State == PLAY_STATE.PS_READY )
             {
 
                 if (Songs.Count > 0)
@@ -710,15 +704,14 @@ namespace MusicPlay
 
 
             }
-            else if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("pause"))
+            else if (axPlayer1.State==PLAY_STATE.PS_PAUSED)
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.play();
+                axPlayer1.Play();
 
             }
             else
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.pause();
-
+                axPlayer1.Pause();
             }
 
         }
@@ -750,11 +743,11 @@ namespace MusicPlay
         {
             if (!model.Equals("LrcModel"))
             {
-                Songerimg.Image = Image.FromFile(@"System\Hover\down.png");
+                Songerimg.Image = Image.FromFile(Application.StartupPath + @"\System\Hover\down.png");
             }
             else
             {
-                Songerimg.Image = Image.FromFile(@"System\Hover\Open.png");
+                Songerimg.Image = Image.FromFile(Application.StartupPath + @"\System\Hover\Open.png");
             }
 
         }
@@ -801,23 +794,23 @@ namespace MusicPlay
         {
             LrcModel();
             lrcPanel.Hide();
-            axWindowsMediaPlayer1.Dock = DockStyle.Fill;
-            axWindowsMediaPlayer1.Visible = true;
-            LrcView.Controls.Add(axWindowsMediaPlayer1);
+            axPlayer1.Dock = DockStyle.Fill;
+            axPlayer1.Visible = true;
+            LrcView.Controls.Add(axPlayer1);
             playMode = ModePlay.mv;
         }
         private void LrcModel()
         {
 
-            Songerimg.Image = Image.FromFile(@"System\Hover\Open.png");
+            Songerimg.Image = Image.FromFile(Application.StartupPath + @"\System\Hover\Open.png");
             model = "LrcModel";
             Search_view.Visible = false;
             LrcView.Visible = true;
             LrcView.BackColor = Color.Transparent;
             Image backimg = null;
-            if (File.Exists(@"System\Static\backimgx.png"))
+            if (File.Exists(Application.StartupPath + @"\System\Static\backimgx.png"))
             {
-                backimg = System.Drawing.Image.FromFile(@"System\Static\backimgx.png");
+                backimg = System.Drawing.Image.FromFile(Application.StartupPath + @"\System\Static\backimgx.png");
             }
             top.BackgroundImage = backimg;
             bot.BackgroundImage = backimg;
@@ -830,7 +823,7 @@ namespace MusicPlay
 
             LrcView.BackgroundImage = backimg;
             lrcPanel.Visible = true;
-            axWindowsMediaPlayer1.Visible = false;
+            axPlayer1.Visible = false;
             playMode = ModePlay.lrc;
 
         }
@@ -846,14 +839,14 @@ namespace MusicPlay
         {
             string key = e.KeyCode.ToString();
 
-            if (key.Equals("Space") && music.State(ref axWindowsMediaPlayer1).Equals("play"))
-            {
-                music.pause(ref axWindowsMediaPlayer1);
-            }
-            else if (key.Equals("Space"))
-            {
-                music.play(ref axWindowsMediaPlayer1);
-            }
+            //if (key.Equals("Space") && music.State(ref axWindowsMediaPlayer1).Equals("play"))
+            //{
+            //    music.pause(ref axWindowsMediaPlayer1);
+            //}
+            //else if (key.Equals("Space"))
+            //{
+            //    music.play(ref axWindowsMediaPlayer1);
+            //}
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1040,15 +1033,7 @@ namespace MusicPlay
 
         }
 
-        private void axWindowsMediaPlayer1_PositionChange(object sender, AxWMPLib._WMPOCXEvents_PositionChangeEvent e)
-        {
-            //Console.WriteLine(e.newPosition);
-        }
 
-        private void axWindowsMediaPlayer1_CurrentPlaylistChange(object sender, AxWMPLib._WMPOCXEvents_CurrentPlaylistChangeEvent e)
-        {
-            Console.WriteLine(0);
-        }
 
         private void top_Paint(object sender, PaintEventArgs e)
         {

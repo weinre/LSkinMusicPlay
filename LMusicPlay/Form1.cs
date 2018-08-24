@@ -1,5 +1,4 @@
 ﻿
-using Shell32;
 using System;
 using System.Drawing;
 using System.IO;
@@ -19,9 +18,9 @@ namespace LMusicPlay
 
             //this.Controls.Add(a);
 
-            string strMp3 = @"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3";
-            axPlayer1.Open(@"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3");
-            axPlayer1.Play();
+            string strMp3 = @"D:\CloudMusic\J.Fla - Shape Of You (cover by J.Fla).mp4";
+            //axPlayer1.Open(strMp3);
+            //axPlayer1.Play();
 
          //
             string mp3InfoInterHtml = "";

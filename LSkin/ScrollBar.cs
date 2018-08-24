@@ -233,7 +233,7 @@ namespace LSkin
             if (!Active) return;
 
             if (TimeDelegate != null) TimeDelegate.Close();
-            TimeDelegate = new System.Timers.Timer(150);
+            TimeDelegate = new System.Timers.Timer(1);
             TimeDelegate.Elapsed += new System.Timers.ElapsedEventHandler(SlideBar_Sleep_Delegate);
             TimeDelegate.AutoReset = true;
             TimeDelegate.Enabled = true;
@@ -272,7 +272,7 @@ namespace LSkin
             this.SlideBar.BackColor = NormalColor;
             SlideBarFlag = false;
             if (TimeDelegate != null) TimeDelegate.Close();
-            TimeDelegate = new System.Timers.Timer(10);
+            TimeDelegate = new System.Timers.Timer(1);
             TimeDelegate.AutoReset = true;
             TimeDelegate.Elapsed += new System.Timers.ElapsedEventHandler(SlideBar_Leave_Delegate);
             TimeDelegate.Enabled = true;
