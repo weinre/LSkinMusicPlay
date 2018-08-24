@@ -34,7 +34,6 @@ namespace LSkin
         /// <summary>
         /// 负责上下滚动的计时器动画
         /// </summary>
-        Timer AnimationTick = new Timer();
 
         /// <summary>
         /// 未播放的歌词字体
@@ -65,9 +64,10 @@ namespace LSkin
         public LrcPanel()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
             this.DoubleBuffered = true;
             this.Paint += new PaintEventHandler(LrcView_Paint);
-            AnimationTick.Tick += new EventHandler(Animation_Tick);
+
             this.MouseMove += new MouseEventHandler(MouseMoveEvent);
             this.MouseDown += new MouseEventHandler(MouseDownEvent);
             this.MouseUp += new MouseEventHandler(MouseUpEvent);
@@ -164,12 +164,19 @@ namespace LSkin
 
         Dictionary<double, byte> Temp = new Dictionary<double, byte>();
 
+        System.Threading.Timer AnimationTick;
+
         /// <summary>
         /// 加载歌词文件并且布局到LrcPanel
         /// </summary>
         /// <param name="fileName">歌词文件路径</param>
         public void LoadLrc(string fileName)
         {
+
+            if (AnimationTick != null) AnimationTick.Dispose();
+
+
+
             this.Clear();
             StreamReader sr = new StreamReader(fileName, Encoding.UTF8);
             List<string> lrc = new List<string>();
@@ -231,12 +238,13 @@ namespace LSkin
 
             }
             Temp.Clear();
-            AnimationTick.Interval = 1;
+            //AnimationTick.Interval = 1;
 
             if (this.LrcList.Count > 0)
             {
                 ChangePostion(this.LrcList[0].PostionDouble);//如果有一句歌词默认是第一句歌词变色
-                AnimationTick.Start();
+                AnimationTick = new System.Threading.Timer(Animation_Tick, null, 0, 1);
+                //AnimationTick.Start();
             }
         }
         /// <summary>
@@ -307,7 +315,7 @@ namespace LSkin
             offsetY = LrcNow.point.Y - VerticalCenter;
         }
 
-        private void Animation_Tick(object sender, EventArgs e)
+        public void Animation_Tick(object sender)
         {
             offsetY = LrcNow.point.Y - VerticalCenter;
             foreach (var item in LrcList)

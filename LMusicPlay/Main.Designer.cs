@@ -38,6 +38,7 @@ namespace MusicPlay
             this.search_back = new System.Windows.Forms.Panel();
             this.btn_find = new System.Windows.Forms.PictureBox();
             this.txt_Songname = new System.Windows.Forms.TextBox();
+            this.Songlist = new LSkin.ScrollPanel();
             this.LrcView = new System.Windows.Forms.Panel();
             this.DownManager = new System.Windows.Forms.PictureBox();
             this.toast = new System.Windows.Forms.ToolTip(this.components);
@@ -49,6 +50,7 @@ namespace MusicPlay
             this.bot = new System.Windows.Forms.Panel();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.volume1 = new LSkin.Volume();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@ namespace MusicPlay
             this.top = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.volume1 = new LSkin.Volume();
-            this.Songlist = new LSkin.ScrollPanel();
             this.listGroup1 = new ListGroup.ListGroup();
             this.Search_view.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -142,6 +142,17 @@ namespace MusicPlay
             this.txt_Songname.Size = new System.Drawing.Size(168, 14);
             this.txt_Songname.TabIndex = 4;
             this.txt_Songname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
+            // Songlist
+            // 
+            this.Songlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Songlist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Songlist.Location = new System.Drawing.Point(0, 37);
+            this.Songlist.Name = "Songlist";
+            this.Songlist.Size = new System.Drawing.Size(378, 458);
+            this.Songlist.TabIndex = 8;
             // 
             // LrcView
             // 
@@ -240,7 +251,6 @@ namespace MusicPlay
             this.bot.Name = "bot";
             this.bot.Size = new System.Drawing.Size(1076, 87);
             this.bot.TabIndex = 7;
-            this.bot.Visible = false;
             // 
             // axWindowsMediaPlayer1
             // 
@@ -261,6 +271,16 @@ namespace MusicPlay
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(123, 87);
             this.panel1.TabIndex = 12;
+            // 
+            // volume1
+            // 
+            this.volume1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.volume1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.volume1.Location = new System.Drawing.Point(85, 16);
+            this.volume1.Name = "volume1";
+            this.volume1.Size = new System.Drawing.Size(34, 135);
+            this.volume1.TabIndex = 0;
+            this.volume1.Voulme = 10;
             // 
             // pictureBox1
             // 
@@ -447,27 +467,6 @@ namespace MusicPlay
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(260, 488);
             this.panelLeft.TabIndex = 12;
-            // 
-            // volume1
-            // 
-            this.volume1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.volume1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.volume1.Location = new System.Drawing.Point(85, 16);
-            this.volume1.Name = "volume1";
-            this.volume1.Size = new System.Drawing.Size(34, 135);
-            this.volume1.TabIndex = 0;
-            this.volume1.Voulme = 10;
-            // 
-            // Songlist
-            // 
-            this.Songlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Songlist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Songlist.Location = new System.Drawing.Point(0, 37);
-            this.Songlist.Name = "Songlist";
-            this.Songlist.Size = new System.Drawing.Size(378, 458);
-            this.Songlist.TabIndex = 8;
             // 
             // listGroup1
             // 

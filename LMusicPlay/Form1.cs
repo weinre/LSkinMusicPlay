@@ -1,4 +1,6 @@
-﻿using ID3;
+﻿using AxAPlayer3Lib;
+using AxPlayer3;
+using ID3;
 using Shell32;
 using System;
 using System.Drawing;
@@ -16,6 +18,12 @@ namespace LMusicPlay
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            //this.Controls.Add(a);
+           
+            //axPlayer1.Open(@"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3");
+            //axPlayer1.Play();
+
             string strMp3 = @"D:\CloudMusic\任金勇 - 任金勇 - 苏喂苏喂苏喂（Remix）.mp3";
             string mp3InfoInterHtml = "";
 

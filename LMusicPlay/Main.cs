@@ -55,7 +55,7 @@ namespace MusicPlay
         kugou k = new kugou();
         http h = new http();
         Color itemColor = Color.Black;
-        Timer Play_Listen;
+        System.Threading.Timer Play_Listen;
         DownSongerImg downSongerImg = new DownSongerImg();
         ModePlay playMode = new ModePlay();
         DownLoadManage downm = new DownLoadManage();
@@ -95,8 +95,8 @@ namespace MusicPlay
             if (!Directory.Exists(SingerPath)) Directory.CreateDirectory(SingerPath);
 
             List<UserItem> userData = new List<UserItem>();//创建《我的好友里面的用户数据》
-         
-           
+
+
 
             foreach (Song item in h.LoadSong(audioPath))
             {
@@ -128,7 +128,7 @@ namespace MusicPlay
 
 
 
-          
+
 
 
             lrcPanel.Dock = DockStyle.Fill;
@@ -139,9 +139,8 @@ namespace MusicPlay
             axWindowsMediaPlayer1.uiMode = "None";
             FormFade.FadeIn(this, 1);
             down.Path = audioPath;
-            Play_Listen = new Timer();
-            Play_Listen.Tick += new System.EventHandler(Play_Listen_event);
-            Play_Listen.Interval = 1;
+            Play_Listen = new System.Threading.Timer(Play_Listen_event, null, 0, 1);
+
             LrcView.Visible = false;
             LrcView.AutoScroll = true;
 
@@ -150,7 +149,7 @@ namespace MusicPlay
             txt_Songname.Text = "抖音";
             try
             {
-          //      button1_Click(null, null);
+                //      button1_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -225,7 +224,6 @@ namespace MusicPlay
                 LoadLrc(s);
                 changeImg(s);
             }
-            Play_Listen.Start();
 
             if (s.MvHash == "")
             {
@@ -497,16 +495,15 @@ namespace MusicPlay
 
 
         }
-
-        private void Play_Listen_event(object sender, EventArgs e)
+        int i = 0;
+        private void Play_Listen_event(object sender)
         {
-            double i = (this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
 
+            i++;
 
+            lrcPanel.ChangePostion((this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition));
 
-            lrcPanel.ChangePostion(i * 1000);
-
-            this.Text = label10.Text;
+            label10.Text = i + "";
 
             if (this.music.State(ref this.axWindowsMediaPlayer1).Equals("stop"))
             {
