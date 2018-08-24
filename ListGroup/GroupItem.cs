@@ -27,6 +27,11 @@ namespace ListGroup
         public bool down = false; //Items是否已经展开
         public KeyDown KeyDown;//键盘按下的对象
         public string baseNmae;
+
+        public GroupItem() {
+            InitializeComponent();
+        }
+
         /// <summary>
         ///groupitem构造方法
         /// </summary>

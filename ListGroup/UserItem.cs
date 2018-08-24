@@ -42,6 +42,12 @@ namespace ListGroup
             this.title.Text = title;
         }
 
+        public UserItem()
+        {
+            InitializeComponent();
+      
+        }
+
         public delegate void InputDone(string str);
 
 

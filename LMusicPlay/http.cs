@@ -1,13 +1,12 @@
 ﻿using MusicPlay;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
+using System.Json;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Json;
+
 
 
 namespace MusciPlay
@@ -22,30 +21,33 @@ namespace MusciPlay
         /// <returns></returns>
         public List<Song> LoadSong(string path)
         {
-            int j = 0;
             List<Song> list = new List<Song>();
-            string[] files = Directory.GetFiles(path);
-            for (int i = 0; i < files.Length; i++)
-            {
-                string text = files[i].ToLower();
-                if (text.Substring(files[i].Length - 3, 3).Equals("mp3") || text.Substring(files[i].Length - 3, 3).Equals("mp4"))
-                {
-                    Song s = new Song();
-                    s.Hash = null;
-                    j++;
-                    s.Extname = text.Substring(files[i].Length - 3, 3);
-                    s.play_url = text;
 
-                    string text2 = text.Substring(3, 3);
-                    string text1 = text.Substring(text.LastIndexOf("\\") + 1);
-                    s.Filename = text1.Substring(0, text1.Length - 4);
-                    s.songname = s.Filename;
-                    if (s.Filename.Length > 20)
-                    {
-                        s.Filename = s.Filename.Substring(0, 20) + "...";
-                    }
-                    list.Add(s);
+            foreach (string file in Directory.GetFiles(path))
+            {
+                int index = file.LastIndexOf(".");
+                string extname = file.Substring(index, file.Length - index);
+
+
+                if (extname != ".mp3" && extname != ".mp4") continue;
+
+                Song s = new Song();
+                s.Hash = null;
+                s.Extname = extname;
+                s.play_url = file;
+                s.Filename = file.Substring(file.LastIndexOf(@"\") + 1, file.Length - file.LastIndexOf(@"\") - extname.Length - 1);
+
+                if (extname == ".mp4") s.MvHash = "local";
+                if (s.Filename.Contains("-"))
+                {
+                    s.Singername = s.Filename.Substring(0, s.Filename.IndexOf("-") - 1);
                 }
+                else
+                {
+                    s.Singername = "网络歌手";
+                }
+
+                list.Add(s);
             }
             return list;
         }

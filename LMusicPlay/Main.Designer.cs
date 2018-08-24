@@ -1,4 +1,6 @@
-﻿namespace MusicPlay
+﻿using ListGroup;
+
+namespace MusicPlay
 {
   
     partial class MainWindow
@@ -45,6 +47,7 @@
             this.Down = new System.Windows.Forms.ToolStripMenuItem();
             this.lrc = new System.Windows.Forms.Timer(this.components);
             this.bot = new System.Windows.Forms.Panel();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -61,10 +64,9 @@
             this.top = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.volume1 = new LSkin.Volume();
-            this.listGroup1 = new ListGroup.ListGroup();
             this.Songlist = new LSkin.ScrollPanel();
+            this.listGroup1 = new ListGroup.ListGroup();
             this.Search_view.SuspendLayout();
             this.panel2.SuspendLayout();
             this.search_back.SuspendLayout();
@@ -72,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DownManager)).BeginInit();
             this.Menu.SuspendLayout();
             this.bot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -83,7 +86,6 @@
             this.top.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panelLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // Search_view
@@ -238,6 +240,16 @@
             this.bot.Name = "bot";
             this.bot.Size = new System.Drawing.Size(1076, 87);
             this.bot.TabIndex = 7;
+            this.bot.Visible = false;
+            // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(723, 7);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
+            this.axWindowsMediaPlayer1.TabIndex = 13;
             // 
             // panel1
             // 
@@ -436,15 +448,6 @@
             this.panelLeft.Size = new System.Drawing.Size(260, 488);
             this.panelLeft.TabIndex = 12;
             // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(723, 7);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
-            this.axWindowsMediaPlayer1.TabIndex = 13;
-            // 
             // volume1
             // 
             this.volume1.BackColor = System.Drawing.Color.LightSlateGray;
@@ -454,16 +457,6 @@
             this.volume1.Size = new System.Drawing.Size(34, 135);
             this.volume1.TabIndex = 0;
             this.volume1.Voulme = 10;
-            // 
-            // listGroup1
-            // 
-            this.listGroup1.BackColor = System.Drawing.Color.Transparent;
-            this.listGroup1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listGroup1.Location = new System.Drawing.Point(0, 0);
-            this.listGroup1.Name = "listGroup1";
-            this.listGroup1.Size = new System.Drawing.Size(337, 486);
-            this.listGroup1.TabIndex = 0;
-            this.listGroup1.TakeDownImage = null;
             // 
             // Songlist
             // 
@@ -475,6 +468,16 @@
             this.Songlist.Name = "Songlist";
             this.Songlist.Size = new System.Drawing.Size(378, 458);
             this.Songlist.TabIndex = 8;
+            // 
+            // listGroup1
+            // 
+            this.listGroup1.BackColor = System.Drawing.Color.Transparent;
+            this.listGroup1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.listGroup1.Location = new System.Drawing.Point(0, 0);
+            this.listGroup1.Name = "listGroup1";
+            this.listGroup1.Size = new System.Drawing.Size(337, 486);
+            this.listGroup1.TabIndex = 0;
+            this.listGroup1.TakeDownImage = null;
             // 
             // MainWindow
             // 
@@ -505,6 +508,7 @@
             this.Menu.ResumeLayout(false);
             this.bot.ResumeLayout(false);
             this.bot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -518,7 +522,6 @@
             this.top.ResumeLayout(false);
             this.panelRight.ResumeLayout(false);
             this.panelLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
         }

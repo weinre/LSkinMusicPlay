@@ -49,5 +49,15 @@ namespace LSkin
             }
             FlowLayoutPanel.Anchor = (AnchorStyles)(AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom);
         }
+
+        int pointY = 0;
+        private void FlowLayoutPanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+
+            Control ct = e.Control;
+           
+            ct.Location = new Point(0,pointY);
+            pointY += ct.Height;
+        }
     }
 }

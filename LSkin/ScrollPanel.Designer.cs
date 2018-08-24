@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.FlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowLayoutPanel = new System.Windows.Forms.Panel();
             this.scrollBar1 = new LSkin.ScrollBar();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,8 +50,9 @@
             this.FlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.FlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.FlowLayoutPanel.Name = "FlowLayoutPanel";
-            this.FlowLayoutPanel.Size = new System.Drawing.Size(477, 321);
+            this.FlowLayoutPanel.Size = new System.Drawing.Size(476, 321);
             this.FlowLayoutPanel.TabIndex = 0;
+            this.FlowLayoutPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.FlowLayoutPanel_ControlAdded);
             // 
             // scrollBar1
             // 
@@ -66,7 +67,6 @@
             this.scrollBar1.Name = "scrollBar1";
             this.scrollBar1.NeedSleep = false;
             this.scrollBar1.NormalColor = System.Drawing.SystemColors.ButtonShadow;
-            this.scrollBar1.RelaPanel = this.FlowLayoutPanel;
             this.scrollBar1.Size = new System.Drawing.Size(10, 321);
             this.scrollBar1.TabIndex = 2;
             // 
@@ -88,6 +88,6 @@
         #endregion
         private ScrollBar scrollBar1;
         private System.Windows.Forms.Panel panel1;
-        public System.Windows.Forms.FlowLayoutPanel FlowLayoutPanel;
+        public System.Windows.Forms.Panel FlowLayoutPanel;
     }
 }

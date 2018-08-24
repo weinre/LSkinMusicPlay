@@ -28,9 +28,9 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MoveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MoveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.log = new System.Windows.Forms.Label();
-            this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,21 +41,28 @@
             this.MoveDownToolStripMenuItem,
             this.添加ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip.Size = new System.Drawing.Size(125, 70);
             // 
             // MoveUpToolStripMenuItem
             // 
             this.MoveUpToolStripMenuItem.Name = "MoveUpToolStripMenuItem";
-            this.MoveUpToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.MoveUpToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.MoveUpToolStripMenuItem.Text = "上移";
             this.MoveUpToolStripMenuItem.Click += new System.EventHandler(this.MouveUpToolStripMenuItem_Click);
             // 
             // MoveDownToolStripMenuItem
             // 
             this.MoveDownToolStripMenuItem.Name = "MoveDownToolStripMenuItem";
-            this.MoveDownToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.MoveDownToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.MoveDownToolStripMenuItem.Text = "下移";
             this.MoveDownToolStripMenuItem.Click += new System.EventHandler(this.MouveDownToolStripMenuItem_Click);
+            // 
+            // 添加ToolStripMenuItem
+            // 
+            this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加ToolStripMenuItem.Text = "添加人员";
+            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -70,6 +77,7 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(337, 433);
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.WrapContents = false;
+            this.flowLayoutPanel1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.flowLayoutPanel1_ControlAdded);
             // 
             // log
             // 
@@ -81,13 +89,6 @@
             this.log.TabIndex = 2;
             this.log.Text = "Tips";
             this.log.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 添加ToolStripMenuItem
-            // 
-            this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.添加ToolStripMenuItem.Text = "添加人员";
-            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // ListGroup
             // 

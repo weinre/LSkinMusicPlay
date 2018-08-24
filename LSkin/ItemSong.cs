@@ -14,7 +14,10 @@ namespace LSkin
 
         public delegate void Callback(object data);
         public event Callback MvIconClick;
+        public ItemSong() {
+            InitializeComponent();
 
+        }
         public ItemSong(string songname, string time, string mv)
         {
             InitializeComponent();

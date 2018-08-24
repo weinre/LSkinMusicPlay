@@ -27,28 +27,31 @@
             this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.title = new System.Windows.Forms.TextBox();
+            this.title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(10, 6);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.Size = new System.Drawing.Size(34, 33);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // title
             // 
-            this.title.BackColor = System.Drawing.SystemColors.Control;
-            this.title.Enabled = false;
-            this.title.Location = new System.Drawing.Point(36, 9);
+            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.title.Location = new System.Drawing.Point(31, 6);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(148, 21);
+            this.title.Size = new System.Drawing.Size(193, 23);
             this.title.TabIndex = 1;
-            this.title.Text = "test";
+            this.title.Text = "label1";
+            this.title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // UserItem
             // 
@@ -59,10 +62,9 @@
             this.Controls.Add(this.title);
             this.Controls.Add(this.pictureBox1);
             this.Name = "UserItem";
-            this.Size = new System.Drawing.Size(198, 33);
+            this.Size = new System.Drawing.Size(227, 33);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -71,6 +73,6 @@
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolTip toolTip;
         private System.ComponentModel.IContainer components;
-        public System.Windows.Forms.TextBox title;
+        public System.Windows.Forms.Label title;
     }
 }

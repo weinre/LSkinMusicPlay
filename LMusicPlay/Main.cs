@@ -4,15 +4,10 @@ using MusciPlay;
 using PictureProcessing;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Test;
 
@@ -21,7 +16,7 @@ namespace MusicPlay
 {
     public partial class MainWindow : Form
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         protected static extern bool AnimateWindow(IntPtr hWnd, int dwTime, int dwFlags);
         public const Int32 AW_BLEND = 0x00080000;
         public const Int32 AW_CENTER = 0x00000010;
@@ -52,7 +47,7 @@ namespace MusicPlay
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
         public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-        Image background = Image.FromFile(@"System\Static\default.png");
+        System.Drawing.Image background = Image.FromFile(@"System\Static\default.png");
 
         string model = "LrcModel";
         Song playnow = null;
@@ -67,8 +62,8 @@ namespace MusicPlay
         //GaussianBlur gs = new GaussianBlur(0);
         Zoom zoom = new Zoom();
         //Timer play_Listen_tick;
-        Image DefaultSonger = Image.FromFile(@"System\Static\DefaultSonger.jpg");
-        Image play_hover = Image.FromFile("System\\Hover\\play.png");
+        System.Drawing.Image DefaultSonger = Image.FromFile(@"System\Static\DefaultSonger.jpg");
+        Image play_hover = System.Drawing.Image.FromFile("System\\Hover\\play.png");
         Image play_static = Image.FromFile("System\\Static\\play.png");
         Image pause_hover = Image.FromFile("System\\Hover\\pause.png");
         Image pause_static = Image.FromFile("System\\Static\\pause.png");
@@ -94,6 +89,11 @@ namespace MusicPlay
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            if (!Directory.Exists(rootPath)) Directory.CreateDirectory(rootPath);
+            if (!Directory.Exists(audioPath)) Directory.CreateDirectory(audioPath);
+            if (!Directory.Exists(lrcPath)) Directory.CreateDirectory(lrcPath);
+            if (!Directory.Exists(SingerPath)) Directory.CreateDirectory(SingerPath);
+
             List<UserItem> userData = new List<UserItem>();//创建《我的好友里面的用户数据》
          
            
@@ -101,10 +101,22 @@ namespace MusicPlay
             foreach (Song item in h.LoadSong(audioPath))
             {
                 userData.Add(new UserItem(null, item.Filename));
-              
+                userData.Add(new UserItem(null, item.Filename));
+                userData.Add(new UserItem(null, item.Filename));
+                userData.Add(new UserItem(null, item.Filename));
+                userData.Add(new UserItem(null, item.Filename));
+                userData.Add(new UserItem(null, item.Filename));
+
+
             }
             GroupItem pengyous = new GroupItem("我的歌曲", userData);
             listGroup1.AddItem(pengyous);
+            listGroup1.AddItem(pengyous);
+            listGroup1.AddItem(pengyous);
+            listGroup1.AddItem(pengyous);
+            listGroup1.AddItem(pengyous);
+            listGroup1.AddItem(pengyous);
+
 
 
             lrcPanel.ClickLrcEvent += new EventHandler(changePostion);
@@ -116,10 +128,7 @@ namespace MusicPlay
 
 
 
-            if (!Directory.Exists(rootPath)) Directory.CreateDirectory(rootPath);
-            if (!Directory.Exists(audioPath)) Directory.CreateDirectory(audioPath);
-            if (!Directory.Exists(lrcPath)) Directory.CreateDirectory(lrcPath);
-            if (!Directory.Exists(SingerPath)) Directory.CreateDirectory(SingerPath);
+          
 
 
             lrcPanel.Dock = DockStyle.Fill;
@@ -396,7 +405,7 @@ namespace MusicPlay
             {
                 ItemSong item = new ItemSong(song.Filename, CastToFen(song.DurationStr), song.MvHash);
                 item.Size = new Size(Songlist.Width - 20, 31);
-                item.BackColor = Color.Beige;
+                //item.BackColor = Color.Beige;
                 item.DoubleClick += new EventHandler(this.ItemSongDoublick);
                 item.MvIconClick += new ItemSong.Callback(MvIconClick);
                 item.Tag = song;
@@ -811,7 +820,7 @@ namespace MusicPlay
             Image backimg = null;
             if (File.Exists(@"System\Static\backimgx.png"))
             {
-                backimg = Image.FromFile(@"System\Static\backimgx.png");
+                backimg = System.Drawing.Image.FromFile(@"System\Static\backimgx.png");
             }
             top.BackgroundImage = backimg;
             bot.BackgroundImage = backimg;

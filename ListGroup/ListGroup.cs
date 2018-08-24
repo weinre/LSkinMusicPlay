@@ -98,5 +98,10 @@ namespace ListGroup
                 tips.ShowTips("添加item:" + item.baseNmae + "[" + input.inputStr + "]");
             }
         }
+
+        private void flowLayoutPanel1_ControlAdded(object sender, ControlEventArgs e)
+        {
+            Console.WriteLine(0);
+        }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MusicPlay;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Windows.Forms;
 
-namespace MusicPlay
+namespace LMusicPlay
 {
     static class Program
     {
