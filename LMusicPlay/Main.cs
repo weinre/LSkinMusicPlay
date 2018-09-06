@@ -86,7 +86,7 @@ namespace MusicPlay
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            axPlayer1.ContextMenuStrip = Menu;
             Play_Listen.Interval = 1;
             Play_Listen.Tick += new EventHandler(Play_Listen_event);
             Play_Listen.Start();

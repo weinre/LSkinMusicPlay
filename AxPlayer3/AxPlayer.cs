@@ -32,7 +32,9 @@ namespace AxPlayer3
         {
             url = url.Replace(@"\", "");
             axPlayer1.Open(url);
+            axPlayer1.Play();
         }
+
 
         public void Play()
         {

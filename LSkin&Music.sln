@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSkin", "LSkin\LSkin.csproj", "{6E3FAC2A-BCB2-4C47-9F09-637921B44EB4}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMusicPlay", "LMusicPlay\LMusicPlay.csproj", "{CBE251FB-D5D7-4AE8-A41C-30DE175326CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxPlayer3", "AxPlayer3\AxPlayer3.csproj", "{E44C4C36-EA8A-4358-9143-CD4C35C41E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMediaPlayer", "NetMediaPlayer\NetMediaPlayer.csproj", "{7E72C7B8-21D1-4F73-BE91-E2D1B94CBABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E44C4C36-EA8A-4358-9143-CD4C35C41E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E44C4C36-EA8A-4358-9143-CD4C35C41E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E44C4C36-EA8A-4358-9143-CD4C35C41E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E72C7B8-21D1-4F73-BE91-E2D1B94CBABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E72C7B8-21D1-4F73-BE91-E2D1B94CBABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E72C7B8-21D1-4F73-BE91-E2D1B94CBABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E72C7B8-21D1-4F73-BE91-E2D1B94CBABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
