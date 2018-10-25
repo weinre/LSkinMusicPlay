@@ -30,9 +30,7 @@ namespace AxPlayer3
 
         public void Open(string url)
         {
-            url = url.Replace(@"\", "");
             axPlayer1.Open(url);
-            axPlayer1.Play();
         }
 
 
@@ -41,16 +39,8 @@ namespace AxPlayer3
             axPlayer1.Play();
         }
 
-
-
-        public void Play(string url)
-        {
-            axPlayer1.Open(url);
-            Play();
-        }
         public void Pause()
         {
-
             axPlayer1.Pause();
         }
 

@@ -1,7 +1,9 @@
 ﻿using MusciPlay;
 using MusicPlay;
+using NetWorkTest;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -199,32 +201,7 @@ namespace loveTest
         private void GetNetData(object sender)
         {
 
-            float postion = (axPlayer1.Position); //视频当前进度 /秒
-            float duration = (axPlayer1.Duration);//视频总长度 /秒
-            try
-            {
-                label1.Text = CastToFen((int)(postion / 1000) + "");
-                label2.Text = CastToFen((int)(duration / 1000) + "");
-            }
-            catch (Exception ex)
-            {
-                //   Console.WriteLine(ex.Message);
-            }
-            try
-            {
-
-                //进度条的长度
-                float totalW = panel1.Width;
-                double panel2W = totalW / duration * postion;
-                this.Text = panel2W + "";
-                panel2.Width = Convert.ToInt32(panel2W);
-
-
-            }
-            catch (Exception ex)
-            {
-                //     Console.WriteLine(ex.Message);
-            }
+            
         }
         private void timer3_Tick(object sender, EventArgs e)
         {
@@ -232,14 +209,7 @@ namespace loveTest
 
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            float duration = axPlayer1.Duration;//视频总长度 /秒
-            panel2.Width = e.Location.X;
-            float totalW = panel1.Width;
-            double num = duration / totalW * panel2.Width;
-            axPlayer1.Position = Convert.ToInt32(num);
-        }
+    
 
         private void 打开本地视频ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -255,17 +225,7 @@ namespace loveTest
 
         }
 
-        private void 全屏ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-
-            menuStrip1.Hide();
-            panel3.Hide();
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
-        }
+     
 
         private void 退出全屏ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -282,18 +242,17 @@ namespace loveTest
         private void 全屏ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             menuStrip1.Hide();
-            panel3.Hide();
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 
         }
 
-
-
         private void 取消全屏ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            menuStrip1.Show();
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.WindowState = FormWindowState.Normal;
+
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -315,9 +274,19 @@ namespace loveTest
                 e.Effect = DragDropEffects.None;
         }
 
-        private void r(object sender, PaintEventArgs e)
-        {
 
+        BottomControl bottom = new BottomControl();
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+            bottom.axPlayer1 = this.axPlayer1;
+            bottom.Width = this.Width;
+
+            bottom.Show();
+        }
+
+        private void axPlayer1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(Pens.Red,0,0,10,10);
         }
     }
 }

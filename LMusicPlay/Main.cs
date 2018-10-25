@@ -103,12 +103,6 @@ namespace MusicPlay
             foreach (Song item in h.LoadSong(audioPath))
             {
                 userData.Add(new UserItem(null, item.Filename));
-                userData.Add(new UserItem(null, item.Filename));
-                userData.Add(new UserItem(null, item.Filename));
-                userData.Add(new UserItem(null, item.Filename));
-                userData.Add(new UserItem(null, item.Filename));
-                userData.Add(new UserItem(null, item.Filename));
-
 
             }
             GroupItem pengyous = new GroupItem("我的歌曲", userData);

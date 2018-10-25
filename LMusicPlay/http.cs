@@ -117,10 +117,10 @@ namespace MusciPlay
 
             JsonValue data = JsonObject.Parse(getJsonText(kugouApi.ReplaceSongInfoUrl(hash)))["data"];
 
-            s.play_url = data["play_url"].ToString();
             s.singerHeadimg = data["img"].ToString();
             s.lyrics = data["lyrics"].ToString();
-            s.play_url = data["play_url"].ToString().Replace(@"""", "");
+
+            s.play_url = data["play_url"].ToString().Replace(@"""", "").Replace(@"\", "") ;
 
             s.lyrics = s.lyrics.Replace(@"\u000d\u000a", "\r\n");
             s.lyrics = s.lyrics.Replace(@"""", "");

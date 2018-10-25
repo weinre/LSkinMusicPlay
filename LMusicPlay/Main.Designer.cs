@@ -158,9 +158,9 @@ namespace MusicPlay
             this.LrcView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.LrcView.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.LrcView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LrcView.Location = new System.Drawing.Point(476, 0);
+            this.LrcView.Location = new System.Drawing.Point(476, 3);
             this.LrcView.Name = "LrcView";
-            this.LrcView.Size = new System.Drawing.Size(306, 498);
+            this.LrcView.Size = new System.Drawing.Size(306, 496);
             this.LrcView.TabIndex = 10;
             // 
             // DownManager
